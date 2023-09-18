@@ -5,12 +5,17 @@ import LineChart from '@/components/LineChart.vue'
 import ValueChart from '@/components/ValueChart.vue'
 
 import { useChartStore } from '@/stores/chart'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
 const store = useChartStore()
-onMounted(async () => {
-  await store.apiAll()
+
+onMounted(() => {
+  store.apiAll()
   store.apiAllInterval()
+})
+
+onUnmounted(() => {
+  store.clearAllInterval()
 })
 </script>
 
@@ -34,7 +39,7 @@ main {
 .chart {
   width: 100%;
   padding: 2rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
 }
 </style>
