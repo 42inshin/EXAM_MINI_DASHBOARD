@@ -57,7 +57,7 @@ const checkNull = (value: any) => {
 }
 
 // 기준시간 2023-02-23 00:00:00
-const standardStartTime = 1677078000
+const standardStartTime = 1677078000 * 1000
 
 export const pieResolver: (
   req: RestRequest<PieReq>,
