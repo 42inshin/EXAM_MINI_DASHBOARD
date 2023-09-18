@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import { DoughnutChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
+import { useChartStore } from '@/stores/chart'
+
+const store = useChartStore()
 
 Chart.register(...registerables)
 

@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { getTimeseries, getPie, getValue } from '@/api/getApi'
 
@@ -7,37 +7,23 @@ export const useChartStore = defineStore('chart', () => {
   const selectorOption = [600000, 1800000, 3600000]
   const selectorOptionName = ['10분', '30분', '1시간']
   const selectedSelector = ref(selectorOption[0])
+
   const setSelectedSelector = (value: number) => {
     selectedSelector.value = value
   }
 
-  const fromUnixTime = ref(currentUnixTime.value - selectedSelector.value)
+  const fromUnixTime = computed(() => currentUnixTime.value - selectedSelector.value)
 
   const getTimesHandler = async () => {
-    const requestData = {
-      from: fromUnixTime.value,
-      to: currentUnixTime.value
-    }
-    const timeseriesData = await getTimeseries(requestData.from, requestData.to)
-    return timeseriesData
+    return await getTimeseries(fromUnixTime.value, currentUnixTime.value)
   }
 
   const getPieHandler = async () => {
-    const requestData = {
-      from: fromUnixTime.value,
-      to: currentUnixTime.value
-    }
-    const PieData = await getPie(requestData.from, requestData.to)
-    return PieData
+    return await getPie(fromUnixTime.value, currentUnixTime.value)
   }
 
   const getValueHandler = async () => {
-    const requestData = {
-      from: fromUnixTime.value,
-      to: currentUnixTime.value
-    }
-    const valueData = await getValue(requestData.from, requestData.to)
-    return valueData
+    return await getValue(fromUnixTime.value, currentUnixTime.value)
   }
 
   return {
