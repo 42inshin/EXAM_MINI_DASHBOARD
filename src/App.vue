@@ -1,19 +1,29 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import DashboardIcon from '@/components/icons/IconDashboard.vue'
+import FeedIcon from '@/components/icons/IconFeed.vue'
+import { Chart, registerables } from 'chart.js'
+
+Chart.register(...registerables)
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">
-          <DashboardIcon />
-          <div>Dashboard</div>
-        </RouterLink>
-      </nav>
+    <div class="logoWrapper">
+      <RouterLink to="/">
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
+      </RouterLink>
     </div>
+    <nav>
+      <RouterLink to="/">
+        <DashboardIcon />
+        <div>Dashboard</div>
+      </RouterLink>
+      <RouterLink to="/about">
+        <FeedIcon />
+        <div>About</div>
+      </RouterLink>
+    </nav>
   </header>
 
   <RouterView />
@@ -21,28 +31,25 @@ import DashboardIcon from '@/components/icons/IconDashboard.vue'
 
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoWrapper {
+  padding: 0.5rem;
+  border-radius: 4px;
 }
 
 .logo {
   display: block;
-  margin: 0 auto 1rem;
 }
 
 nav {
-  width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 1rem;
-}
-
-nav a div.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a div.router-link-exact-active:hover {
-  background-color: transparent;
 }
 
 nav a {
@@ -50,7 +57,6 @@ nav a {
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
   padding: 0.2rem 0.8rem;
-  border-radius: 8px;
 }
 
 nav a:first-of-type {

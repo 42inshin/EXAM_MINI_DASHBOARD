@@ -84,7 +84,7 @@ export const pieResolver: (
 
   let startTime = from - Math.floor(from % interval)
   const finishTime = to - Math.floor(to % interval)
-  for (let dataInd = indexFrom; startTime < finishTime; dataInd++) {
+  for (let dataInd = indexFrom; startTime < finishTime && dataInd < pies.length; dataInd++) {
     pies[dataInd].data.forEach((item, index) => {
       if (pieDatas[index]) {
         return

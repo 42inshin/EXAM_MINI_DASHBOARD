@@ -72,7 +72,7 @@ export const valueResolver: (
 
   let startTime = from - Math.floor(from % interval)
   const finishTime = to - Math.floor(to % interval)
-  for (let dataInd = indexFrom; startTime < finishTime; dataInd++) {
+  for (let dataInd = indexFrom; startTime < finishTime && dataInd < values.length; dataInd++) {
     resultValue.value += values[dataInd].value
     startTime += interval
   }
