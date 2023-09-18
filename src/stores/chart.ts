@@ -28,7 +28,7 @@ export const useChartStore = defineStore('chart', () => {
   const pieData = ref([10, 10, 10, 10, 10]) // pie 차트 데이터
 
   const valueUnit = ref('') // value 차트 단위
-  const valueData = ref(0) // value 차트 데이터
+  const valueData = ref('0') // value 차트 데이터
 
   const unixtimeToTimeString = (unixtime: number) => {
     const date = new Date(unixtime)
@@ -57,11 +57,44 @@ export const useChartStore = defineStore('chart', () => {
 
   const apiValue = async () => {
     const response = await getValue(fromUnixTime.value, currentUnixTime.value)
-    valueData.value = response.value
-    valueUnit.value = response.unit
+    valueData.value = formatValueData(response.value)
+    valueUnit.value = formatValueUnit(response.value, response.unit)
+    checkValueWarning(response.value)
     return response
   }
 
+  // value 차트 경고
+  const valueWarning = ref(false)
+  const warningRange = 900
+
+  const checkValueWarning = (value: number) => {
+    if (selectedSelector.value === selectorOption[0] && value > warningRange) {
+      valueWarning.value = true
+    } else if (selectedSelector.value === selectorOption[1] && value > warningRange * 3) {
+      valueWarning.value = true
+    } else if (selectedSelector.value === selectorOption[2] && value > warningRange * 6) {
+      valueWarning.value = true
+    } else {
+      valueWarning.value = false
+    }
+  }
+
+  // value 자리수
+  const formatValueData = (value: number) => {
+    if (value > 1000) return (value / 1000).toFixed(2)
+    return value.toFixed(2)
+  }
+
+  const formatValueUnit = (value: number, unit: string) => {
+    if (value > 1000) {
+      if (unit === 'bytes') return 'KB'
+      if (unit === 'KB') return 'MB'
+      if (unit === 'MB') return 'GB'
+    }
+    return unit
+  }
+
+  // 모든 API 호출
   const apiAll = () => {
     getCurrentUnixTime()
     apiTimeseries()
@@ -69,12 +102,14 @@ export const useChartStore = defineStore('chart', () => {
     apiValue()
   }
 
+  // API 호출 주기
+  const intervalRange = 10000
   const apiInterval = ref<NodeJS.Timer | null>(null)
 
   const apiAllInterval = () => {
     apiInterval.value = setInterval(() => {
       apiAll()
-    }, 5000)
+    }, intervalRange)
   }
 
   const clearAllInterval = () => {
@@ -95,6 +130,7 @@ export const useChartStore = defineStore('chart', () => {
     pieData,
     valueUnit,
     valueData,
+    valueWarning,
     setSelectedSelector,
     apiTimeseries,
     apiPie,

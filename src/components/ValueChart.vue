@@ -3,12 +3,12 @@ import { useChartStore } from '@/stores/chart'
 import { storeToRefs } from 'pinia'
 
 const store = useChartStore()
-const { valueUnit, valueData } = storeToRefs(store)
+const { valueUnit, valueData, valueWarning } = storeToRefs(store)
 </script>
 
 <template>
   <div class="chart">
-    <div class="contents">
+    <div class="contents" :class="{ warning: valueWarning }">
       {{ valueData }} <span class="unit">{{ valueUnit }}</span>
     </div>
   </div>
@@ -29,6 +29,10 @@ const { valueUnit, valueData } = storeToRefs(store)
 .contents {
   font-size: 3.5rem;
   font-weight: bold;
+}
+
+.warning {
+  color: red;
 }
 
 .unit {
