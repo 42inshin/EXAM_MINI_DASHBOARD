@@ -4,14 +4,8 @@ import { storeToRefs } from 'pinia'
 
 const store = useChartStore()
 const { selectedSelector } = storeToRefs(store)
-const {
-  selectorOption,
-  selectorOptionName,
-  setSelectedSelector,
-  getPieHandler,
-  getTimesHandler,
-  getValueHandler
-} = store
+const { selectorOption, selectorOptionName, setSelectedSelector, apiPie, apiTimeseries, apiValue } =
+  store
 </script>
 
 <template>
@@ -28,9 +22,9 @@ const {
         {{ selectorOptionName[index] }}
       </li>
     </ul>
-    <button @click="getTimesHandler">getTimeseries</button>
-    <button @click="getPieHandler">getPie</button>
-    <button @click="getValueHandler">getValue</button>
+    <button @click="apiTimeseries">getTimeseries</button>
+    <button @click="apiPie">getPie</button>
+    <button @click="apiValue">getValue</button>
   </div>
 </template>
 

@@ -14,15 +14,15 @@ export const useChartStore = defineStore('chart', () => {
 
   const fromUnixTime = computed(() => currentUnixTime.value - selectedSelector.value)
 
-  const getTimesHandler = async () => {
+  const apiTimeseries = async () => {
     return await getTimeseries(fromUnixTime.value, currentUnixTime.value)
   }
 
-  const getPieHandler = async () => {
+  const apiPie = async () => {
     return await getPie(fromUnixTime.value, currentUnixTime.value)
   }
 
-  const getValueHandler = async () => {
+  const apiValue = async () => {
     return await getValue(fromUnixTime.value, currentUnixTime.value)
   }
 
@@ -31,8 +31,8 @@ export const useChartStore = defineStore('chart', () => {
     selectorOptionName,
     selectedSelector,
     setSelectedSelector,
-    getTimesHandler,
-    getPieHandler,
-    getValueHandler
+    apiTimeseries,
+    apiPie,
+    apiValue
   }
 })
