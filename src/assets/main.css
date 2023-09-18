@@ -30,4 +30,10 @@ nav a.router-link-exact-active:hover {
 
 .chart {
   margin: 1rem 0;
+  resize: both;
+  overflow: auto;
+  min-width: 320px;
+  min-height: 440px;
+  max-width: 1200px;
+  max-height: 500px;
 }
