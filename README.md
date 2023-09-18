@@ -22,7 +22,7 @@
 
 ### 선택 구현 사항
 
-- ☐ 사용자가 대시보드에 3종의 차트 중 원하는 것 하나를 추가할 수 있는 기능
+- ☑ 사용자가 대시보드에 3종의 차트 중 원하는 것 하나를 추가할 수 있는 기능
 - ☑ 값 차트가 특정 기준 값 이상일 때, 값의 색상이 변하는 기능
 - ☑ 값 차트의 값을 항상 소수 점 위 3자리, 소수 점 아래 2자리까지만 보이도록 하기
 - ▲ 대시보드 페이지의 차트들의 위치와 크기를 원하는 대로 조작 가능한 기능
@@ -202,7 +202,7 @@ MSW를 구성하기까지 몇가지 파일 수정을 거쳤으며, 수정을 통
 
 ### Pinia Store 사용 시 반응형을 유지한 채로 속성 추출하는 방법
 
-[참고 문서](https://pinia.vuejs.kr/core-concepts/#destructuring-from-a-store)
+[참조 문서](https://pinia.vuejs.kr/core-concepts/#destructuring-from-a-store)
 
 반응형을 유지하면서 스토어의 ref()인 속성을 추출하려면, storeToRefs()를 사용해야 합니다.
 
@@ -218,6 +218,30 @@ MSW를 구성하기까지 몇가지 파일 수정을 거쳤으며, 수정을 통
 </script>
 ```
 
+### Vue에서 동적 컴포넌트 또는 엘리먼트 렌더링 방법
+
+[참조 문서](https://ko.vuejs.org/api/built-in-special-elements.html#component)
+
+추가 구현으로 + 버튼을 클릭시 차트 종류를 고를 수 있게 하여, 3가지 종류 중 사용자가 원하는 차트를 추가할 수 있도록 구현했습니다.
+
+Vue에서는 동적으로 컴포넌트를 렌더링하기 위해서 **특수 엘리먼트**를 제공합니다.
+
+`is`라는 prop의 값으로 렌더링할 실제 컴포넌트가 결정됩니다
+
+```html
+<script setup>
+  const charts = shallowRef <(typeof LineChart | typeof PieChart | typeof ValueChart)[]>[]
+</script>
+
+<template>
+  <div v-for="(chart, index) in charts" :key="index">
+    <component :is="chart" />
+  </div>
+</template>
+```
+
+charts에는 컴포넌트인 LineChart, PieChart, ValueChart를 추가할 수 있게 했습니다.
+
 ### 참조 문서
 
 [Chart.js](https://www.chartjs.org/)
@@ -231,3 +255,5 @@ MSW를 구성하기까지 몇가지 파일 수정을 거쳤으며, 수정을 통
 [Pinia](https://pinia.vuejs.kr/)
 
 [구글 Icons](https://fonts.google.com/icons)
+
+[vuejs.org](https://ko.vuejs.org/)

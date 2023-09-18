@@ -14,17 +14,16 @@ const plusChartHandler = () => {
   onChartsView.value = !onChartsView.value
 }
 
-const charts = shallowRef<any>([])
+const charts = shallowRef<(typeof LineChart | typeof PieChart | typeof ValueChart)[]>([])
 
 const addChart = (chartType: string) => {
-  if (chartType === '선 차트') {
+  if (chartType === chartTypes[0]) {
     charts.value.push(LineChart)
-  } else if (chartType === '파이 차트') {
+  } else if (chartType === chartTypes[1]) {
     charts.value.push(PieChart)
-  } else if (chartType === '값 차트') {
+  } else if (chartType === chartTypes[2]) {
     charts.value.push(ValueChart)
   }
-  console.log(charts.value)
   onChartsView.value = false
 }
 </script>

@@ -13,7 +13,7 @@
       </p>
       <br />
       <h3>기술스택</h3>
-      <p>Vue3 + Typescript + Vite + Pinia + msw + Vue-Chart-3 + Chart.js</p>
+      <p>Vue3 + Typescript + Vite + Pinia + MSW + Vue-Chart-3 + Chart.js</p>
       <br />
       <h3>차트 별 API</h3>
       <ul>
@@ -30,6 +30,14 @@
         <a href="https://mswjs.io/docs/recipes/deferred-mounting">msw: Deferred mounting</a>
         <a href="https://fonts.google.com/icons">구글 Icons</a>
       </div>
+      <br />
+      <h3>소스코드</h3>
+      <p>
+        더 자세한 내용은 Readme를 참조해주세요.
+        <span class="reference">
+          <a href="https://github.com/42inshin/EXAM_MINI_DASHBOARD">깃허브 바로가기</a>
+        </span>
+      </p>
     </article>
   </main>
 </template>
