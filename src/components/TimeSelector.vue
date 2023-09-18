@@ -52,16 +52,13 @@ ul {
   margin: 0;
   display: flex;
 }
+
 li {
   cursor: pointer;
   padding: 0.2rem 0.8rem;
   border-radius: 8px;
   border: 1px solid var(--color-border);
   margin-right: 0.25rem;
-}
-li.selected {
-  background-color: var();
-  color: var(--color-text);
 }
 
 li.selected {
@@ -71,9 +68,7 @@ li.selected {
   transition: 0.4s;
 }
 
-@media (hover: hover) {
-  li:hover {
-    background-color: rgba(100, 149, 237, 0.2);
-  }
+li:hover {
+  background-color: rgba(100, 149, 237, 0.2);
 }
 </style>

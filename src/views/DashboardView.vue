@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
 import TimeSelector from '@/components/TimeSelector.vue'
 import PieChart from '@/components/PieChart.vue'
 import LineChart from '@/components/LineChart.vue'
 import ValueChart from '@/components/ValueChart.vue'
-
+import AddChart from '@/components/AddChart.vue'
 import { useChartStore } from '@/stores/chart'
-import { onMounted } from 'vue'
 
 const store = useChartStore()
-onMounted(async () => {
-  await store.apiAll()
+
+onMounted(() => {
+  store.apiAll()
   store.apiAllInterval()
+})
+
+onUnmounted(() => {
+  store.clearAllInterval()
 })
 </script>
 
@@ -20,6 +25,7 @@ onMounted(async () => {
     <LineChart />
     <PieChart />
     <ValueChart />
+    <AddChart />
   </main>
 </template>
 
@@ -34,7 +40,7 @@ main {
 .chart {
   width: 100%;
   padding: 2rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
 }
 </style>
