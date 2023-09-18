@@ -14,11 +14,9 @@ const getFetch = (apiUrl: string, from: number, to: number) => {
       return response.json()
     })
     .then((data) => {
-      console.log('데이터 수신:', data)
       return data
     })
     .catch((error) => {
-      console.error('오류 발생:', error)
       throw error
     })
 }
