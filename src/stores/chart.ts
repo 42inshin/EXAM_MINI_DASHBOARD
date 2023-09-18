@@ -103,7 +103,7 @@ export const useChartStore = defineStore('chart', () => {
   }
 
   // API 호출 주기
-  const intervalRange = 10000
+  const intervalRange = 10000 // 10초
   const apiInterval = ref<NodeJS.Timer | null>(null)
 
   const apiAllInterval = () => {

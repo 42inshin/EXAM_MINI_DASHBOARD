@@ -20,6 +20,7 @@ const { valueUnit, valueData, valueWarning } = storeToRefs(store)
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 160px;
 }
 
 .title {
@@ -27,7 +28,7 @@ const { valueUnit, valueData, valueWarning } = storeToRefs(store)
 }
 
 .contents {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 
