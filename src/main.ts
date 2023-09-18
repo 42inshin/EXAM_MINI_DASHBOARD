@@ -5,13 +5,13 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import { worker } from './mocks/browser'
 
 // MockServiceWorker
-const prepare = () => {
+const prepare = async () => {
   if (process.env.NODE_ENV === 'development') {
-    import('./mocks/browser').then(({ worker }) => worker.start({ onUnhandledRequest: 'bypass' }))
+    await worker.start({ onUnhandledRequest: 'bypass' })
   }
-  return Promise.resolve()
 }
 
 const app = createApp(App)

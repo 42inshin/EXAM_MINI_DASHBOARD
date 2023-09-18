@@ -1,26 +1,41 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { DoughnutChart } from 'vue-chart-3'
-import { Chart, registerables } from 'chart.js'
 import { useChartStore } from '@/stores/chart'
+import { storeToRefs } from 'pinia'
 
 const store = useChartStore()
+const { pieLabel, pieData } = storeToRefs(store)
 
-Chart.register(...registerables)
-
-const testData = ref({
-  labels: ['Paris', 'Nîmes', 'Toulon', 'Perpignan', 'Autre'],
+const chartData = ref({
+  labels: pieLabel.value,
   datasets: [
     {
-      data: [30, 40, 60, 70, 5],
+      data: pieData.value,
       backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED']
     }
   ]
 })
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false
+    }
+  }
+}
+
+watchEffect(() => {
+  chartData.value.labels = pieLabel.value
+  chartData.value.datasets[0].data = pieData.value
+})
 </script>
 
 <template>
-  <DoughnutChart :chartData="testData" />
+  <div class="chart">
+    <DoughnutChart :chartData="chartData" :options="options" />
+  </div>
 </template>
 
 <style scoped></style>
