@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
 import TimeSelector from '@/components/TimeSelector.vue'
 import PieChart from '@/components/PieChart.vue'
 import LineChart from '@/components/LineChart.vue'
 import ValueChart from '@/components/ValueChart.vue'
-
+import AddChart from '@/components/AddChart.vue'
 import { useChartStore } from '@/stores/chart'
-import { onMounted, onUnmounted } from 'vue'
 
 const store = useChartStore()
 
@@ -25,6 +25,7 @@ onUnmounted(() => {
     <LineChart />
     <PieChart />
     <ValueChart />
+    <AddChart />
   </main>
 </template>
 

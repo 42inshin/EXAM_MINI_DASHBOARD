@@ -3,6 +3,7 @@
   --white: #ffffff;
   --black: #181818;
   --indigo: #2c3e50;
+  --blue: cornflowerblue;
 
   --divider-light: rgba(60, 60, 60, 0.12);
   --divider-dark: rgba(84, 84, 84, 0.48);
@@ -13,6 +14,7 @@
 
 /* semantic color variables for this project */
 :root {
+  --color-main: var(--blue);
   --color-background: var(--white);
   --color-border: var(--divider-light);
   --color-text: var(--text-light);

@@ -15,7 +15,7 @@ a {
 }
 
 nav a.router-link-exact-active {
-  color: rgb(100, 149, 237);
+  color: var(--color-main);
 }
 
 nav a.router-link-exact-active:hover {
